@@ -1,7 +1,7 @@
 from Bio import SeqIO
 
-input_file = "HO_sequences.fasta"
-output_file = "HO_protein_sequences.fasta"
+input_file = "ORFs_sequences.fasta"
+output_file = "protein_sequences.fasta"
 
 with open(output_file, "w") as out_handle:
     for record in SeqIO.parse(input_file, "fasta"):
