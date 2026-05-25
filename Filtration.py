@@ -20,13 +20,6 @@ alt_isoforms['ref_int_was_pos']=alt_isoforms.apply(
 #only the rows where ref_int_was_pos is True are kept
 F2=alt_isoforms[alt_isoforms['ref_int_was_pos']==True]
 print('Only_ref_pos:',len(F2))
-#Filter 3 : removing genes which are not present in protein_predictions
-genes_in_protein_predictions=set(protein_predictions['prot_id'].str.replace(r'_\d+$','',regex=True))
-F3=F2[F2['Gene_Symbol'].isin(genes_in_protein_predictions)].copy()
-print('genes not in protein predictions :',len(F3))
-missing_genes=F2[~F2['Gene_Symbol'].isin(genes_in_protein_predictions)]['Gene_Symbol'].unique()
-print('genes removed:',missing_genes)
-#Saving all filtered files
-F3.to_csv('Filtered_interactor_table.csv',index=False)
+F2.to_csv('Filtered_interactor_table.csv',index=False)
 protein_predictions.to_csv('ensemble_1423.csv',index=False)
 print('Complete')
