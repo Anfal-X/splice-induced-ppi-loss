@@ -38,8 +38,9 @@ The pipeline:
 │
 │   # -- Exploratory analysis --
 ├── Step_1_Unique_Canonical_Sequences_Filtration.py    # Extract canonical sequences for genes present in the dataset
-├── Step_2_and_3.py                                    # Expand to residue level; annotate with Pfam domains; calculate prop_A/B/C
-├── Step_4_plot_formation.py                           # Generate domain overlap bar charts across all models and groups (PDF)
+├──Step_2_Interproscan_Rest_API.p                      # fetches Pfam domain annotations via InterPro REST API;submits canonical sequences
+├── Step_3_and_4.py                                    # Expand to residue level; annotate with Pfam domains; calculate prop_A/B/C
+├── Step_5_domain_plot.py                              # Generates lost vs. preserved side-by-side domain overlap bar charts (PDF)
 ├── One_Histogram_formation.py                         # Histogram: percentage of predicted interface lost per isoform
 └── Density_plot.py                                    # Overlaid KDE density plots of interface residues lost across all 8 models
 ```
@@ -100,8 +101,9 @@ Jaccard index    Chi-squared test     Wilcoxon rank-sum (PRIMARY)
 **Exploratory analysis** (run after `Final_table.py`, no correction applied):
 ```
 Step_1_Unique_Canonical_Sequences_Filtration.py → extract canonical sequences
-Step_2_and_3.py                                 → residue expansion + Pfam annotation + prop_A/B/C
-Step_4_plot_formation.py                        → domain overlap bar charts (PDF, 24 plots)
+Step_2_Interproscan_Rest_API.py                 → submits canonical sequences
+Step_3_and_4.py                                 → residue expansion + Pfam annotation + prop_A/B/C
+Step_5_plot_formation.py                        → domain overlap bar charts lost vs preserved (PDF, 24 plots)
 One_Histogram_formation.py                      → histogram: % of interface lost per isoform
 Density_plot.py                                 → overlaid KDE density plots across all 8 models
 ```
@@ -117,7 +119,7 @@ Density_plot.py                                 → overlaid KDE density plots a
 | `Fixed_interactor_table.xlsx` | Interactor panel with interaction outcomes (Yang et al.) |
 | `protein_sequences.fasta` | All isoform protein sequences |
 | `ORFs_sequences.fasta` | ORF nucleotide sequences (for `orfs_translation.py`) |
-| `interpro_pfam_only.tsv` | Pfam domain annotations (from InterPro) |
+
 
 ---
 
@@ -130,10 +132,11 @@ Density_plot.py                                 → overlaid KDE density plots a
 | `spliced_positions_longest.csv` | Spliced positions using longest isoform as reference |
 | `preds-<model>-all_final_table_reference1.csv` | Final table with PiPENN scores per isoform |
 | `Triples_<Model>.csv` | Mixed-outcome pairs (one positive + one negative isoform per gene-interactor pair) |
+| `interpro_pfam_only.tsv` | Pfam domain annotations (from InterPro) |
 | `domain_analysis_results/` | Per-model proportion CSVs (prop_A, prop_B, prop_C) |
 | `all_pvalues.csv` | Raw p-values across all 8 models |
 | `BH_corrected_results.xlsx` | BH-corrected p-values and significance markers |
-| `all_24_plots.pdf` | Domain overlap bar charts for all models and groups |
+| `all_24_plots_lost_vs_preserved.pdf` | Domain overlap bar charts lost vs preserved for all models and groups |
 | `interface_lost_all_models_overlaid.png` | Overlaid KDE density plot |
 
 ---
